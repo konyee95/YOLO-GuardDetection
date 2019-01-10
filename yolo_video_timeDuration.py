@@ -1,5 +1,5 @@
 # USAGE
-# python3 yolo_video_timeDuration.py --yolo yolo-guard
+# python3 yolo_video_timeDuration.py --yolo yolo-guard --tracker csrt
 
 # import the necessary packages
 import numpy as np
@@ -17,6 +17,8 @@ ap.add_argument("-c", "--confidence", type=float, default=0.2,
 	help="minimum probability to filter weak detections")
 ap.add_argument("-t", "--threshold", type=float, default=0.3,
 	help="threshold when applying non-maxima suppression")
+ap.add_argument("-tr", "--tracker", type=str, default="kcf",
+	help="OpenCV object tracker type")
 args = vars(ap.parse_args())
 
 # load the GUARD class labels our YOLO model was trained on
@@ -27,6 +29,21 @@ LABELS = open(labelsPath).read().strip().split("\n")
 np.random.seed(42)
 COLORS = np.random.randint(0, 255, size=(len(LABELS), 3),
 	dtype="uint8")
+
+# initialize a dictionary that maps strings to their corresponding
+# OpenCV object tracker implementations
+OPENCV_OBJECT_TRACKERS = {
+	"csrt": cv2.TrackerCSRT_create,
+	"kcf": cv2.TrackerKCF_create,
+	"boosting": cv2.TrackerBoosting_create,
+	"mil": cv2.TrackerMIL_create,
+	"tld": cv2.TrackerTLD_create,
+	"medianflow": cv2.TrackerMedianFlow_create,
+	"mosse": cv2.TrackerMOSSE_create
+}
+
+# initialize OpenCV's special multi-object tracker
+trackers = cv2.MultiTracker_create()
 
 # derive the paths to the YOLO weights and model configuration
 weightsPath = os.path.sep.join([args["yolo"], "yolov3-tiny_37856.weights"])
@@ -162,6 +179,8 @@ while True:
 			# draw a bounding box rectangle and label on the frame
 			color = [int(c) for c in COLORS[classIDs[i]]]
 			cv2.rectangle(frame65, (x, y), (x + w, y + h), color, 2)
+			tracker = OPENCV_OBJECT_TRACKERS[args["tracker"]]()
+			trackers.add(tracker, frame65, box)
 			text = "{}: {:.4f} {}".format(LABELS[classIDs[i]], confidences[i], (guardSeenDuration))
 			cv2.putText(frame65, text, (x, y - 5),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
