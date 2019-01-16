@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+  {% for result in results %}
+    <article>
+      <div>
+        <div>
+          <a>{{ result._id }}</a>
+          <small>{{ result.time }}</small>
+          <small>{{ result.place }}</small>
+        </div>
+        <h2><a>{{ result.guard_exist }}</a></h2>
+        <p>{{ result.time_duration }}</p>
+      </div>
+    </article>
+  {% endfor %}
+{% endblock content %}

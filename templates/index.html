@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+ 
+<head>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-style.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chartist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='morris.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='c3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tempusdominus-bootstrap-4.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    {% if title %}
+        <title>Top Glove Dashboard - {{ title }}</title>
+    {% else %}
+        <title>Top Glove Dashboard</title>
+    {% endif %}
+</head>
+
+<body>
+    <div class="dashboard-main-wrapper">
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <img src="{{ logo_image }}" alt="User Image" href="{{ url_for('home') }}" width="220" height="80">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+        <div class="nav-left-sidebar sidebar-dark">
+            <div class="menu-list">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-divider">
+                                Menu
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ url_for('home') }}"><i class="fa fa-fw fa-user-circle"></i>Dashboard </a>
+                                <a class="nav-link" href="{{ url_for('table') }}"><i class="fa fa-fw fa-table"></i>Data Table </a>
+                            </li>
+                        <ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="dashboard-wrapper">
+            <div class="container-fluid  dashboard-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+                {% block scripts %}
+                <script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>
+                <script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
+                {% endblock scripts %}
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jquery 3.3.1 -->
+    <script  href="{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+    <!-- bootstap bundle js -->
+    <script href="{{ url_for('static', filename='bootstrap.bundle.js') }}"></script>
+    <!-- slimscroll js -->
+    <script href="{{ url_for('static', filename='jquery.slimscroll.js') }}"></script>
+    <!-- main js -->
+    <script href="{{ url_for('static', filename='main-js.js') }}"></script>
+    <!-- chart chartist js -->
+    <script href="{{ url_for('static', filename='chartist.min.js') }}"></script>
+    <!-- sparkline js -->
+    <script href="{{ url_for('static', filename='sparkline/jquery.sparkline.js') }}"></script>
+    <!-- morris js -->
+    <script href="{{ url_for('static', filename='raphael.min.js') }}"></script>
+    <script href="{{ url_for('static', filename='morris.js') }}"></script>
+    <!-- chart c3 js -->
+    <script href="{{ url_for('static', filename='c3.min.js') }}"></script>
+    <script href="{{ url_for('static', filename='d3-5.4.0.min.js') }}"></script>
+    <script href="{{ url_for('static', filename='C3chartjs.js') }}"></script>
+    <script href="{{ url_for('static', filename='dashboard-detection.js') }}"></script>
+    <!-- date picker js -->
+    <script href="{{ url_for('static', filename='moment.js') }}"></script>
+    <script href="{{ url_for('static', filename='tempusdominus-bootstrap-4.js') }}"></script>
+    <script href="{{ url_for('static', filename='datepicker.js') }}"></script>
+</body>
+</html>

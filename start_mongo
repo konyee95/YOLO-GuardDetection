@@ -1,0 +1,28 @@
+sudo service mongod start
+
+mongo
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-style.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-all.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chartist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='morris.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='c3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flag-icon.min.css') }}">
+    {% if title %}
+        <title>Top Glove Dashboard - {{ title }}</title>
+    {% else %}
+        <title>Top Glove Dashboard</title>
+    {% endif %}
+</head>
+
+href="{{ url_for('home') }}"
+
+<img class="navbar-brand" href="{{ url_for('home') }}"  src="{{ logo_image }}" alt="User Image" width="220" height="80">

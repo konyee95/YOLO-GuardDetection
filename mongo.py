@@ -167,7 +167,7 @@ while True:
             text = "{}: {:.4f} {}".format(LABELS[classIDs[i]], confidences[i], (guardSeenDuration))
             cv2.putText(frame65, text, (x, y - 5),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            gdata = {"time":datetime.datetime.now() , "guard_exist":True, "time_duration":guardSeenDuration}
+            gdata = {"place":"Factory 2", "time":datetime.datetime.now() , "guard_exist":True, "time_duration":guardSeenDuration}
             db_data = collection.insert_one(gdata)
             print(db_data.inserted_id)
     
@@ -187,4 +187,3 @@ while True:
 
     cv2.imshow("frame", frame65)
     key = cv2.waitKey(1)
-    

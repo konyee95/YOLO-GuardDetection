@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+</head>
+<body>
+    <img src="{{ logo_image }}" alt="User Image" width="125" height="50">
+	<h1>FontAwesome Example</h1>
+    <p>This is an example of a <span class="fas fa-bell"></span> link.</p>
+{% block content %}
+<div class="dashboard-forms ">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Dashboard</h2>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Overview</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">DatePicker</h5>
+                <div class="card-body">
+                    <h5>Basic</h5>
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <script>console.log("Basic!");</script>
+                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top">
+                    <h5>Date Only</h5>
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
+                            <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                <script>console.log("Date!");</script>
+                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+</body>
+</html>

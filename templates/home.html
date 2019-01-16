@@ -1,15 +1,41 @@
-{% extends "layout.html" %}
+{% extends "index.html" %}
+{% block scripts %}
+  {{ super() }}
+  {{ datepicker.loader(theme="base") }} {# to load jQuery-ui #}
+  {{ datepicker.picker(id=".dp") }}
+{% endblock %} 
 {% block content %}
-  {% for result in results %}
-    <article class="media content-section">
-      <div class="media-body">
-        <div class="article-metadata">
-          <a class="mr-2" href="#">{{ result._id }}</a>
-          <small class="text-muted">{{ result.time }}</small>
+<div class="dashboard-forms ">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <h2 class="pageheader-title">Dashboard</h2>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Overview</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <h2><a class="article-title" href="#">{{ result.guard_exist }}</a></h2>
-        <p class="article-content">{{ result.time_duration }}</p>
-      </div>
-    </article>
-  {% endfor %}
-{% endblock content %}
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5><i class="fa fa-fw fas fa-calendar-alt"></i>Date</h5>
+                    <form class="verticalform">
+                        <input type="text" class="form-control dp" />
+                        <script>
+                            var currentDate = $( ".selector" ).datepicker( "getDate" );
+                            console.log(currentDate)
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}    
