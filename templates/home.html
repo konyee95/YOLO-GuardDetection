@@ -35,11 +35,13 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5><i class="fa fa-fw fas fa-calendar-alt"></i>Date</h5>
-                    <input type="date" name="dateSelect" id="dateSelect"/>
-                    <button onclick="myFunction()">Search</button>
-                    <p id="start"></p>
-                    <p id="end"></p>
+                    <form method="POST">
+                        <h5><i class="fa fa-fw fas fa-calendar-alt"></i>Date</h5>
+                        <input type="date" name="dateSelect" id="dateSelect" value={{ dateSelect }}/>
+                        <button onclick="myFunction()">Search</button>
+                        <p id="start" name="start"></p>
+                        <p id="end" name="end"></p>
+                    </form>
                 </div>
             </div>
         </div>

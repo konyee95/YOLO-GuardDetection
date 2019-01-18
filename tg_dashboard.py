@@ -17,12 +17,19 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/TG_database"
 app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER 
 mongo = PyMongo(app)
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 @app.route("/home", methods=['GET','POST'])
 def home():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')   
     results = mongo.db.date_collection.find({"guard_exist": True})
-    return render_template('home.html', results=results, logo_image=full_filename)
+
+    if request.method=='POST':
+        start_date = request.form['dateSelect']
+        print(start_date)
+        return render_template('home.html', results=results, logo_image=full_filename, start_date=start_date, start=start)
+        
+    else:
+        return render_template('home.html', results=results, logo_image=full_filename)
 
 @app.route("/table")
 def table():
