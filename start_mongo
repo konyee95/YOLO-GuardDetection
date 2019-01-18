@@ -25,4 +25,12 @@ mongo
 
 href="{{ url_for('home') }}"
 
+db.date_collection.find({"time":{$gte:new ISODate(z),$lte:new ISODate("2017-04-15T23:59:59Z")}}).count();
+
 <img class="navbar-brand" href="{{ url_for('home') }}"  src="{{ logo_image }}" alt="User Image" width="220" height="80">
+
+ if request.method=='POST':
+        start_date = request.form['dateSelect']
+        return render_template('home.html', results=results, logo_image=full_filename, start_date=start_date)
+        
+    else:

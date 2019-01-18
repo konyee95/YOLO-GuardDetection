@@ -1,11 +1,21 @@
 {% extends "index.html" %}
 {% block scripts %}
-  {{ super() }}
-  {{ datepicker.loader(theme="base") }} {# to load jQuery-ui #}
-  {{ datepicker.picker(id=".dp") }}
-{% endblock %} 
+<script>
+    function myFunction() {
+        var x = document.getElementById("dateSelect").value;
+        var y = new Date(x);
+        var z = y.toISOString();
+        document.getElementById("start").innerHTML = z;
+        var a = y.setDate(y.getDate()+1)
+        var b = new Date(a).toISOString();
+        document.getElementById("end").innerHTML = b;
+        console.log(start)
+        console.log(end)
+    }
+</script>
+{% endblock scripts %} 
 {% block content %}
-<div class="dashboard-forms ">
+<div class="dashboard-forms">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
@@ -26,13 +36,10 @@
             <div class="card">
                 <div class="card-body">
                     <h5><i class="fa fa-fw fas fa-calendar-alt"></i>Date</h5>
-                    <form class="verticalform">
-                        <input type="text" class="form-control dp" />
-                        <script>
-                            var currentDate = $( ".selector" ).datepicker( "getDate" );
-                            console.log(currentDate)
-                        </script>
-                    </form>
+                    <input type="date" name="dateSelect" id="dateSelect"/>
+                    <button onclick="myFunction()">Search</button>
+                    <p id="start"></p>
+                    <p id="end"></p>
                 </div>
             </div>
         </div>

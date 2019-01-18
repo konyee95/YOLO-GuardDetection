@@ -1,16 +1,15 @@
-from flask import Flask, render_template, url_for, flash, redirect
+from flask import Flask, render_template, url_for, flash, redirect, request
 from flask_bootstrap import Bootstrap
-from flask_datepicker import datepicker
 from bson import ObjectId # For ObjectId to work
 from flask_pymongo import PyMongo
-import os
 from flask_fontawesome import FontAwesome
+from flask_wtf import Form
+import os
 
 IMAGE_FOLDER = os.path.join('static', 'image')
 app = Flask(__name__)
 
 Bootstrap(app)
-datepicker(app)
 fa = FontAwesome(app)
 
 app.config["MONGO_DBNAME"]= "TG_database"
@@ -19,11 +18,11 @@ app.config['UPLOAD_FOLDER'] = IMAGE_FOLDER
 mongo = PyMongo(app)
 
 @app.route("/")
-@app.route("/home")
+@app.route("/home", methods=['GET','POST'])
 def home():
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')   
     results = mongo.db.date_collection.find({"guard_exist": True})
-    return render_template('home.html', results=results, logo_image = full_filename)
+    return render_template('home.html', results=results, logo_image=full_filename)
 
 @app.route("/table")
 def table():
