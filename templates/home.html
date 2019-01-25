@@ -1,16 +1,59 @@
 {% extends "index.html" %}
 {% block scripts %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
 <script>
+    // bar chart data
+    var barData = {
+        labels : [
+            {% for hour in labels %}
+                '{{ hour }}',
+            {% endfor %}
+        ],
+        datasets : [{
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve : false,
+            data : [
+            {% for count in values %}
+                "{{ count }}",
+            {% endfor %}
+        ]
+    }]
+    }
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+    // get bar chart canvas
+    var mychart = document.getElementById("chart").getContext("2d");
+    steps = 10
+    // max = {{ max }}
+    max = 3000
+    // draw bar chart
+    new Chart(mychart).Line(barData, {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+    });
+
     function myFunction() {
         var x = document.getElementById("dateSelect").value;
-        var y = new Date(x);
-        var z = y.toISOString();
-        document.getElementById("start").innerHTML = z;
-        var a = y.setDate(y.getDate()+1)
-        var b = new Date(a).toISOString();
-        document.getElementById("end").innerHTML = b;
-        console.log(start)
-        console.log(end)
+        console.log(x)
     }
 </script>
 {% endblock scripts %} 
@@ -20,14 +63,6 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
                 <h2 class="pageheader-title">Dashboard</h2>
-                <div class="page-breadcrumb">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Overview</a></li>
-                        </ol>
-                    </nav>
-                </div>
             </div>
         </div>
     </div>
@@ -37,11 +72,19 @@
                 <div class="card-body">
                     <form method="POST">
                         <h5><i class="fa fa-fw fas fa-calendar-alt"></i>Date</h5>
-                        <input type="date" name="dateSelect" id="dateSelect" value={{ dateSelect }}/>
+                        <input type="date" name="dateSelect" id="dateSelect"/>
                         <button onclick="myFunction()">Search</button>
-                        <p id="start" name="start"></p>
-                        <p id="end" name="end"></p>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <h5 class="card-header">Line Graph</h5>
+                <div class="card-body">
+                    <canvas id="chart" width="700" height="400"></canvas>
                 </div>
             </div>
         </div>

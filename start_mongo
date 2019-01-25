@@ -33,4 +33,11 @@ db.date_collection.find({"time":{$gte:new ISODate(z),$lte:new ISODate("2017-04-1
         start_date = request.form['dateSelect']
         return render_template('home.html', results=results, logo_image=full_filename, start_date=start_date)
         
-    else:
+else:
+
+results = mongo.db.date_collection.find({
+            "time": {
+                "$gte": date1,
+                "$lte": date2
+            }
+        })

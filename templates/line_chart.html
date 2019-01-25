@@ -28,9 +28,9 @@
           pointHighlightStroke: "rgba(151,187,205,1)",
           bezierCurve : false,
           data : [
-	    {% for result in results %}
-              {{ result.guard_exist  }},
-            {% endfor %}]
+	        {% for result in results %}
+            "{{ result.guard_exist }}",
+          {% endfor %}
           }
 	]
       }
